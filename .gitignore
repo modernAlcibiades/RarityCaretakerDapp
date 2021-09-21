@@ -1,6 +1,7 @@
 node_modules
 .idea
 .env
+config.js
 
 #Hardhat files
 cache
