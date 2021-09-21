@@ -100,14 +100,17 @@ async function main() {
 
   console.log("Valid summoners", to_run);
   // now characters should be able to visit cellar
-  const txn3 = await caretaker.connect(deployer).doAll(to_run);
-  const receipt3 = await txn3.wait();
-  await wait_nonce();
-  console.log(receipt3.events);
+  if (to_run.length > 0) {
+    const txn3 = await caretaker.connect(deployer).doAll(to_run);
+    const receipt3 = await txn3.wait();
+    await wait_nonce();
+    console.log(receipt3.events);
+  }
+
 
   // Updated stats
   console.log("Id : Level, XP, Gold, Gems");
-  for (let i = 0; i < tokens.length; i++) {
+  for (let i = 0; i < to_run.length; i++) {
     const level = parseInt(await rarity.level(tokens[i]));
     const xp = parseInt(ethers.utils.formatEther(await rarity.xp(tokens[i])));
     const gold = parseInt(ethers.utils.formatEther(await base.balanceOf(tokens[i])));
