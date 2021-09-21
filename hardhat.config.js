@@ -15,7 +15,7 @@ module.exports = {
       forking: {
         chainId: 250,
         url: "https://rpc.ftm.tools/",
-        blockNumber: 17309300,
+        blockNumber: 17438900,
       }
     },
     fantom: {

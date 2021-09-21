@@ -4,24 +4,8 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
-
-let tokens = [
-  2371608, 2371609,
-
-  2383706, 2383707,
-  2383708, 2383709,
-  2383710, 2383711,
-  2383712, 2383713,
-  2383714, 2383715,
-  2383716,
-
-  2385269,
-  2385270, 2385271,
-  2385272, 2385273,
-  2385274, 2385275,
-  2385276, 2385277,
-  2385278, 2385279
-];
+const { tokens } = require("../config.js");
+console.log(tokens);
 let deployer;
 let rarity, rarity_attributes, caretaker;
 const SLEEPMS = 1000;

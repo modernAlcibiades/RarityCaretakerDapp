@@ -4,24 +4,8 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
-
-let tokens = [
-  2371608, 2371609,
-
-  2383706, 2383707,
-  2383708, 2383709,
-  2383710, 2383711,
-  2383712, 2383713,
-  2383714, 2383715,
-  2383716,
-
-  2385269,
-  2385270, 2385271,
-  2385272, 2385273,
-  2385274, 2385275,
-  2385276, 2385277,
-  2385278, 2385279
-];
+const { tokens } = require("../config.js");
+console.log(tokens);
 let deployer;
 let rarity, rarity_attributes, caretaker;
 const SLEEPMS = 2000;
@@ -86,24 +70,37 @@ async function main() {
   console.log("Owner", await caretaker.owner());
 
   // Initial value for all characters
-  console.log("Id : Level, XP, Gold, Gems");
+  const timenow = Math.floor(Date.now() / 1000);
+  console.log("Id : Level, XP, Gold, Gems, Next Adventure");
+  let to_run = [];
   for (let i = 0; i < tokens.length; i++) {
-    const level = parseInt(ethers.utils.formatEther(await rarity.level(tokens[i])));
-    const xp = parseInt(ethers.utils.formatEther(await rarity.xp(tokens[i])));
-    const gold = parseInt(ethers.utils.formatEther(await base.balanceOf(tokens[i])));
-    const gems = parseInt(ethers.utils.formatEther(await rarity_crafting.balanceOf(tokens[i])));
-    console.log(tokens[i], level, xp, gold, gems);
+    const log = parseInt(await rarity.adventurers_log(tokens[i]));
+    const approved = await rarity.getApproved(tokens[i]);
 
     // Approve tokens if not approved
-    try {
-      await approval(tokens[i], `${caretaker.address}`);
-    } catch (e) {
-      console.log(e)
+    if (log < timenow && approved == caretaker.address) {
+      const level = parseInt(await rarity.level(tokens[i]));
+      const xp = parseInt(ethers.utils.formatEther(await rarity.xp(tokens[i])));
+      const gold = parseInt(ethers.utils.formatEther(await base.balanceOf(tokens[i])));
+      const gems = parseInt(await rarity_crafting.balanceOf(tokens[i]));
+      console.log(tokens[i], level, xp, gold, gems, log);
+
+      /* Not doing forced approvals for now
+      try {
+        await approval(tokens[i], `${caretaker.address}`);
+      } catch (e) {
+        console.log(e)
+      }*/
+      to_run.push(tokens[i]);
+    } else {
+      console.log('Not time yet or not approved', tokens[i], log, timenow, approved);
     }
+
   }
 
+  console.log("Valid summoners", to_run);
   // now characters should be able to visit cellar
-  const txn3 = await caretaker.connect(deployer).doAll(tokens);
+  const txn3 = await caretaker.connect(deployer).doAll(to_run);
   const receipt3 = await txn3.wait();
   await wait_nonce();
   console.log(receipt3.events);
@@ -111,12 +108,13 @@ async function main() {
   // Updated stats
   console.log("Id : Level, XP, Gold, Gems");
   for (let i = 0; i < tokens.length; i++) {
-    const level = parseInt(ethers.utils.formatEther(await rarity.level(tokens[i])));
+    const level = parseInt(await rarity.level(tokens[i]));
     const xp = parseInt(ethers.utils.formatEther(await rarity.xp(tokens[i])));
     const gold = parseInt(ethers.utils.formatEther(await base.balanceOf(tokens[i])));
-    const gems = parseInt(ethers.utils.formatEther(await rarity_crafting.balanceOf(tokens[i])));
+    const gems = parseInt(await rarity_crafting.balanceOf(tokens[i]));
     console.log(tokens[i], level, xp, gold, gems);
   }
+
 }
 
 // We recommend this pattern to be able to use async/await everywhere
