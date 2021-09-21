@@ -10,6 +10,10 @@ It takes all the approved summoners in a wallet and takes them through these fiv
 
 You will only need to approve the tokens the first time you use. After that, every day, you can send the whole group of your summoners to the above mentioned tasks with one click. See details below.
 
+Please NOTE that approval for each summoner will create a transaction for each of your summoners. This is due to the design of the Rarity Gold and Crafting contracts that do not take global approval. If someone finds a way around this issue, please let me know. 
+
+Daily tasks do not have this issue, and will only need only 1 transaction regardless of the number of summoners. You can also run it multiple times if you add/approve more summoners later. It already takes into account which summoners can go on adventure at a given time.
+
 ## Hardhat Hackathon Boilerplate
 
 This repository contains a sample project that you can use as the starting point

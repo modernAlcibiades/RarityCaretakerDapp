@@ -309,21 +309,42 @@ export class Dapp extends React.Component {
   }
 
   async _approval(id, addr) {
-    const approved = await this._rarity.getApproved(id);
-    console.log("Approved", id, approved);
-
-    if (approved !== addr) {
-      const txn = await this._rarity.approve(addr, id);
-      this.setState({ txBeingSent: txn.hash });
-      const receipt = txn.wait();
-      // The receipt, contains a status flag, which is 0 to indicate an error.
-      if (receipt.status === 0) {
-        // We can't know the exact error that made the transaction fail when it
-        // was mined, so we throw this generic one.
-        throw new Error("Transaction failed");
-      }
+    try {
       const approved = await this._rarity.getApproved(id);
       console.log("Approved", id, approved);
+
+      if (approved !== addr) {
+        const txn = await this._rarity.approve(addr, id);
+        this.setState({ txBeingSent: txn.hash });
+        const receipt = txn.wait();
+        // The receipt, contains a status flag, which is 0 to indicate an error.
+        if (receipt.status === 0) {
+          // We can't know the exact error that made the transaction fail when it
+          // was mined, so we throw this generic one.
+          throw new Error("Transaction failed");
+        }
+        const approved = await this._rarity.getApproved(id);
+        console.log("Approved", id, approved);
+      }
+    } catch (error) {
+      // We check the error code to see if this error was produced because the
+      // user rejected a tx. If that's the case, we do nothing.
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      else if (error.message === 'Internal JSON-RPC error.') {
+        // Metamask glitches out too frequently. This reruns the command
+        await this._approval(id, addr);
+      }
+
+      // Other errors are logged and stored in the Dapp's state. This is used to
+      // show them to the user, and for debugging.
+      console.error(error);
+      this.setState({ transactionError: error });
+    } finally {
+      // If we leave the try/catch, we aren't sending a tx anymore, so we clear
+      // this part of the state.
+      this.setState({ txBeingSent: undefined });
     }
   }
 
@@ -424,23 +445,7 @@ export class Dapp extends React.Component {
     // way we can indicate that we are waiting for it to be mined.
     console.log(Object.keys(tokens[0]));
     for (let i = 0; i < tokens.length; i++) {
-      try {
-        await this._approval(tokens[i], addr)
-      } catch (error) {
-        // We check the error code to see if this error was produced because the
-        // user rejected a tx. If that's the case, we do nothing.
-        if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-          return;
-        }
-        // Other errors are logged and stored in the Dapp's state. This is used to
-        // show them to the user, and for debugging.
-        console.error(error);
-        this.setState({ transactionError: error });
-      } finally {
-        // If we leave the try/catch, we aren't sending a tx anymore, so we clear
-        // this part of the state.
-        this.setState({ txBeingSent: undefined });
-      }
+      await this._approval(tokens[i], addr);
     }
     // If we got here, the transaction was successful, so you may want to
     // update your state. Here, we update the user's balance.
