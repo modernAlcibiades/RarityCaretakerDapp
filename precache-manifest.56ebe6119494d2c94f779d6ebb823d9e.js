@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a923dcee684de95844fb3cff676e3e2a",
+    "revision": "3ec95da9dd3a40978ea4ad128a949a8a",
     "url": "/RarityCaretakerDapp/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9770ff7528cf8db04b97",
-    "url": "/RarityCaretakerDapp/static/js/main.21f24ff1.chunk.js"
+    "revision": "1f2612733f8feae25e0c",
+    "url": "/RarityCaretakerDapp/static/js/main.13b8a861.chunk.js"
   },
   {
     "revision": "11cb6d6ba9728f3bec3e",

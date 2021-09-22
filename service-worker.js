@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/RarityCaretakerDapp/precache-manifest.b922d7514edd2c520e9905d98780f8a5.js"
+  "/RarityCaretakerDapp/precache-manifest.56ebe6119494d2c94f779d6ebb823d9e.js"
 );
 
 self.addEventListener('message', (event) => {
