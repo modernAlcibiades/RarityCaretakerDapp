@@ -5,8 +5,8 @@ import { ethers } from "ethers";
 
 // We import the contract's artifacts and address here, as we are going to be
 // using them with ethers
-import Caretaker from "../contracts/RarityCaretaker.json";
-import Rarity from "../contracts/rarity.json";
+import Caretaker from "../contract_json/RarityCaretaker.json";
+import Rarity from "../contract_json/rarity.json";
 
 
 // All the logic of this dapp is contained in the Dapp component.
