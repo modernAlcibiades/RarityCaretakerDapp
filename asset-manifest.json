@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/modernAlcibiades/RarityCaretakerDapp/static/js/main.21f24ff1.chunk.js",
-    "main.js.map": "/modernAlcibiades/RarityCaretakerDapp/static/js/main.21f24ff1.chunk.js.map",
-    "runtime-main.js": "/modernAlcibiades/RarityCaretakerDapp/static/js/runtime-main.17208953.js",
-    "runtime-main.js.map": "/modernAlcibiades/RarityCaretakerDapp/static/js/runtime-main.17208953.js.map",
-    "static/css/2.74189dbb.chunk.css": "/modernAlcibiades/RarityCaretakerDapp/static/css/2.74189dbb.chunk.css",
-    "static/js/2.5657d43a.chunk.js": "/modernAlcibiades/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js",
-    "static/js/2.5657d43a.chunk.js.map": "/modernAlcibiades/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js.map",
-    "index.html": "/modernAlcibiades/RarityCaretakerDapp/index.html",
-    "precache-manifest.23f3f684f12f318b0ed6cfa4c2b3f30c.js": "/modernAlcibiades/RarityCaretakerDapp/precache-manifest.23f3f684f12f318b0ed6cfa4c2b3f30c.js",
-    "service-worker.js": "/modernAlcibiades/RarityCaretakerDapp/service-worker.js",
-    "static/css/2.74189dbb.chunk.css.map": "/modernAlcibiades/RarityCaretakerDapp/static/css/2.74189dbb.chunk.css.map",
-    "static/js/2.5657d43a.chunk.js.LICENSE.txt": "/modernAlcibiades/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js.LICENSE.txt"
+    "main.js": "/RarityCaretakerDapp/static/js/main.21f24ff1.chunk.js",
+    "main.js.map": "/RarityCaretakerDapp/static/js/main.21f24ff1.chunk.js.map",
+    "runtime-main.js": "/RarityCaretakerDapp/static/js/runtime-main.561b6d34.js",
+    "runtime-main.js.map": "/RarityCaretakerDapp/static/js/runtime-main.561b6d34.js.map",
+    "static/css/2.74189dbb.chunk.css": "/RarityCaretakerDapp/static/css/2.74189dbb.chunk.css",
+    "static/js/2.5657d43a.chunk.js": "/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js",
+    "static/js/2.5657d43a.chunk.js.map": "/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js.map",
+    "index.html": "/RarityCaretakerDapp/index.html",
+    "precache-manifest.b922d7514edd2c520e9905d98780f8a5.js": "/RarityCaretakerDapp/precache-manifest.b922d7514edd2c520e9905d98780f8a5.js",
+    "service-worker.js": "/RarityCaretakerDapp/service-worker.js",
+    "static/css/2.74189dbb.chunk.css.map": "/RarityCaretakerDapp/static/css/2.74189dbb.chunk.css.map",
+    "static/js/2.5657d43a.chunk.js.LICENSE.txt": "/RarityCaretakerDapp/static/js/2.5657d43a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.17208953.js",
+    "static/js/runtime-main.561b6d34.js",
     "static/css/2.74189dbb.chunk.css",
     "static/js/2.5657d43a.chunk.js",
     "static/js/main.21f24ff1.chunk.js"
